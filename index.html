@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hayvanlarda Sinir Sistemi - Naci Karhan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .correct-btn { background-color: #10b981 !important; color: white !important; border-color: #10b981 !important; }
+        .wrong-btn { background-color: #ef4444 !important; color: white !important; border-color: #ef4444 !important; }
+        .review-card { transition: all 0.3s ease; }
+        .review-card:hover { transform: translateY(-2px); }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-indigo-700 text-white p-6 shadow-xl">
+        <div class="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <div class="bg-white p-2 rounded-xl text-indigo-700 shadow-inner">
+                    <i class="fas fa-brain fa-2x"></i>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-extrabold tracking-tight">Sinir Sistemi Farklılıkları</h1>
+                    <p class="text-indigo-100 text-xs">YKS Biyoloji Hazırlık Uygulaması</p>
+                </div>
+            </div>
+            <nav class="flex bg-indigo-800/50 p-1 rounded-2xl">
+                <button onclick="showTab('home')" class="nav-btn px-4 py-2 rounded-xl text-sm font-bold transition-all bg-white text-indigo-700 shadow">Giriş</button>
+                <button onclick="showTab('discover')" class="nav-btn px-4 py-2 rounded-xl text-sm font-bold transition-all hover:bg-indigo-600">Keşfet</button>
+                <button onclick="showTab('summary')" class="nav-btn px-4 py-2 rounded-xl text-sm font-bold transition-all hover:bg-indigo-600">Özet</button>
+                <button onclick="showTab('quiz')" class="nav-btn px-4 py-2 rounded-xl text-sm font-bold transition-all hover:bg-indigo-600">Dene</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-4xl w-full mx-auto p-4 md:p-8">
+
+        <!-- Home Section -->
+        <section id="home" class="tab-content active space-y-6">
+            <div class="bg-white rounded-3xl p-8 shadow-xl border border-slate-100 relative overflow-hidden transition-all hover:scale-[1.01]">
+                <h2 class="text-3xl font-black text-indigo-900 mb-4">Başarıya Giden Yol! 🚀</h2>
+                <p class="text-lg text-slate-600 mb-8 leading-relaxed">
+                    Hayvanlar alemindeki sinir sistemlerinin evrimsel gelişimini MEB müfredatına tam uyumlu olarak öğrenmeye hazır mısın? 
+                    Bu uygulama ile önce <b>keşfedecek</b>, sonra <b>özet notlarla</b> pekiştirecek ve en sonunda <b>kendini deneyeceksin.</b>
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <button onclick="showTab('discover')" class="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-4 rounded-2xl font-bold shadow-lg shadow-indigo-200 transition-all flex items-center gap-2">
+                        Hemen Keşfet <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-2xl shadow-md text-center border-b-4 border-amber-400">
+                    <i class="fas fa-microscope text-amber-500 text-2xl mb-3"></i>
+                    <h3 class="font-bold">Bilimsel İçerik</h3>
+                    <p class="text-xs text-slate-500 mt-2">Akademik düzeyde doğruluk, lise düzeyinde anlatım.</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-md text-center border-b-4 border-blue-400">
+                    <i class="fas fa-stopwatch text-blue-500 text-2xl mb-3"></i>
+                    <h3 class="font-bold">Süre Yönetimi</h3>
+                    <p class="text-xs text-slate-500 mt-2">YKS tadında 5 dakikalık etkileşimli test.</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-md text-center border-b-4 border-emerald-400">
+                    <i class="fas fa-check-double text-emerald-500 text-2xl mb-3"></i>
+                    <h3 class="font-bold">Anında Sonuç</h3>
+                    <p class="text-xs text-slate-500 mt-2">Hatalarını anında gerekçesiyle öğren.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Discover Section -->
+        <section id="discover" class="tab-content space-y-6">
+            <h2 class="text-2xl font-bold text-slate-800 border-l-4 border-indigo-600 pl-4">Evrimsel Basamaklar</h2>
+            <div id="discover-list" class="space-y-4">
+                <!-- İçerik JS ile dolacak -->
+            </div>
+        </section>
+
+        <!-- Summary Section -->
+        <section id="summary" class="tab-content space-y-6">
+            <h2 class="text-2xl font-bold text-slate-800 border-l-4 border-emerald-600 pl-4">Kısa Notlar (Hap Bilgiler)</h2>
+            <div id="summary-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- İçerik JS ile dolacak -->
+            </div>
+        </section>
+
+        <!-- Quiz Section -->
+        <section id="quiz" class="tab-content space-y-6">
+            <div id="quiz-intro" class="bg-white rounded-3xl p-10 text-center shadow-xl border border-indigo-50">
+                <div class="bg-indigo-50 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 text-indigo-600">
+                    <i class="fas fa-clock fa-2x"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-slate-800 mb-4">Hazır mısın?</h2>
+                <p class="text-slate-500 mb-8">10 soru, 5 dakika ve her doğru 10 puan. Sesli uyarılar aktiftir.</p>
+                <button onclick="startQuiz()" class="bg-indigo-600 text-white px-10 py-4 rounded-2xl font-bold text-lg shadow-lg hover:bg-indigo-700 transition-all">Sınavı Başlat</button>
+            </div>
+
+            <div id="quiz-container" class="hidden space-y-6">
+                <div class="flex justify-between items-center bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
+                    <div class="font-bold text-indigo-700">Soru: <span id="q-count">1/10</span></div>
+                    <div id="timer" class="font-mono text-xl font-bold text-slate-700 flex items-center gap-2">
+                        <i class="fas fa-hourglass-half"></i> 05:00
+                    </div>
+                    <div class="font-bold text-emerald-600">Puan: <span id="q-score">0</span></div>
+                </div>
+
+                <div class="bg-white rounded-3xl p-8 shadow-md border border-slate-100 min-h-[400px]">
+                    <h3 id="question-text" class="text-xl font-bold text-slate-800 mb-8 leading-snug">Soru metni buraya gelecek...</h3>
+                    <div id="options-container" class="grid gap-3">
+                        <!-- Seçenekler JS ile dolacak -->
+                    </div>
+                    <div id="feedback" class="mt-6 p-4 rounded-xl hidden text-sm font-medium italic"></div>
+                </div>
+            </div>
+
+            <div id="quiz-result" class="hidden space-y-8 animate-in zoom-in duration-300">
+                <div class="bg-white rounded-3xl p-10 text-center shadow-xl border border-indigo-50">
+                    <div class="text-indigo-600 mb-4"><i class="fas fa-trophy fa-4x"></i></div>
+                    <h2 class="text-3xl font-black mb-2">Sınav Tamamlandı!</h2>
+                    <p id="final-score-text" class="text-xl text-slate-600 mb-6">Toplam Puan: 0</p>
+                    <div id="performance-msg" class="bg-slate-50 p-6 rounded-2xl mb-8 font-medium"></div>
+                    <div class="flex justify-center gap-4">
+                        <button onclick="location.reload()" class="bg-slate-200 text-slate-700 px-8 py-3 rounded-xl font-bold hover:bg-slate-300 transition-all">Baştan Başla</button>
+                        <button onclick="scrollToAnalysis()" class="bg-indigo-600 text-white px-8 py-3 rounded-xl font-bold hover:bg-indigo-700 transition-all">Soruları İncele ↓</button>
+                    </div>
+                </div>
+
+                <!-- Analysis Table -->
+                <div id="analysis-container" class="space-y-4">
+                    <h3 class="text-2xl font-black text-slate-800 text-center mb-6">Soru Analizi</h3>
+                    <div id="analysis-list" class="space-y-4">
+                        <!-- Sonuçlar buraya gelecek -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 p-8 mt-12">
+        <div class="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-sm">
+                <p>© 2024 YKS Biyoloji Etkileşim</p>
+                <p class="text-xs text-slate-600 mt-1 italic">Bu uygulama MEB kazanımları esas alınarak hazırlanmıştır.</p>
+            </div>
+            <div class="flex items-center gap-3">
+                <div class="text-right">
+                    <p class="text-sm font-bold text-slate-200">Tasarım: Naci Karhan</p>
+                    <p class="text-xs text-indigo-400">Biyoloji Eğitim Platformu</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- DATA ---
+        const discoverContent = [
+            { title: "Süngerler", desc: "Dokulaşma yoktur. Gerçek bir sinir sistemi ve duyu hücresi bulunmaz. Tepki hücresel düzeydedir.", icon: "🧽" },
+            { title: "Sölenterler (Hidra)", desc: "İlk sinir sistemi 'Ağsı (Difüz) Sistem' burada görülür. Özelleşmiş merkez/beyin yoktur. Uyarı tüm vücuda yayılır.", icon: "🐙" },
+            { title: "Yassı Solucanlar (Planarya)", desc: "Sefalizasyon (merkezileşme) başlar. Baş bölgesinde gangliyonlar bulunur. 'Merdiven Sinir Sistemi' görülür.", icon: "🐛" },
+            { title: "Halkalı Solucanlar & Eklembacaklılar", desc: "Sinir kordonu KARIN (ventral) bölgesindedir. Her segmentte gangliyonlar ve gelişmiş duyu organları mevcuttur.", icon: "🐜" },
+            { title: "Omurgalılar", desc: "Sinir şeridi SIRT (dorsal) bölgesindedir. Beyin ve omurilikten oluşan gelişmiş Merkezi Sinir Sistemi (MSS) bulunur.", icon: "🦁" }
+        ];
+
+        const summaryNotes = [
+            "Sinir sistemi bulunmayan tek hayvan grubu süngerlerdir.",
+            "Deniz anası ve hidrada beyin yoktur, ağsı sinir sistemi vardır.",
+            "Planarya (yassı solucan) merkezi sinir sisteminin ilk ilkel örneğidir.",
+            "Omurgasızların sinir şeridi vücudun karın (ventral) kısmındadır.",
+            "Omurgalıların (balık, kuş, memeli vb.) sinir şeridi SIRT (dorsal) kısmındadır.",
+            "Gangliyon: Sinir hücre gövdelerinin oluşturduğu kümelenmelerdir.",
+            "Sefalizasyon: Kontrolün baş bölgesinde toplanması (beyinleşme).",
+            "Ağsı sinir sisteminde uyarının şiddeti her yöne azalarak iletilir.",
+            "Eklem bacaklılarda duyu organları (bileşik göz vb.) çok gelişmiştir.",
+            "Nöral tüp: Omurgalılarda sinir sisteminin geliştiği embriyonik yapıdır.",
+            "İp merdiven tipi yapı en tipik olarak yassı solucanlarda görülür.",
+            "Böceklerde ventral sinir kordonu her segmentte sinir düğümleri taşır.",
+            "Merkezileşme arttıkça öğrenme ve hafıza yeteneği de artar.",
+            "Süngerlerde koordinasyon sadece kimyasal yollarla veya hücreler arası iletimle sağlanır."
+        ];
+
+        const questions = [
+            {
+                q: "Sinir sistemi bulunmayan tek çok hücreli hayvan grubu hangisidir?",
+                options: ["Süngerler", "Sölenterler", "Yassı solucanlar", "Halkalı solucanlar", "Eklem bacaklılar"],
+                correct: 0,
+                rat: "Süngerlerde gerçek dokulaşma ve sinir hücresi yoktur."
+            },
+            {
+                q: "İlk defa merkezileşmenin (sefalizasyon) görüldüğü canlı grubu hangisidir?",
+                options: ["Deniz anası", "Hidra", "Planarya", "Toprak solucanı", "Arı"],
+                correct: 2,
+                rat: "Yassı solucanlardan olan Planarya'da ilk gangliyonlar (beyin başlangıcı) görülür."
+            },
+            {
+                q: "Aşağıdaki canlılardan hangisinde sinir şeridi vücudun sırt (dorsal) kısmında yer alır?",
+                options: ["Çekirge", "Toprak solucanı", "Kertenkele", "Deniz yıldızı", "Ahtapot"],
+                correct: 2,
+                rat: "Kertenkele bir omurgalıdır ve omurgalılarda sinir şeridi sırttadır."
+            },
+            {
+                q: "Hidra'da görülen ağsı (difüz) sinir sistemi ile ilgili hangisi doğrudur?",
+                options: ["Özelleşmiş bir beyin bulunur.", "Uyarılara karşı tüm vücutla tepki verilir.", "Sinir kordonu ventraldedir.", "Sefalizasyon görülür.", "Sadece baş bölgesinde nöron vardır."],
+                correct: 1,
+                rat: "Merkez olmadığı için uyarı tüm vücuda yayılır ve bütüncül tepki verilir."
+            },
+            {
+                q: "Merdiven sinir sisteminde boyuna uzanan kordonları birbirine bağlayan yapıların adı nedir?",
+                options: ["Gangliyon", "Dendrit", "Enine sinirler", "Nöral tüp", "Miyelin"],
+                correct: 2,
+                rat: "Enine bağlantılar yapıya 'merdiven' görünümü kazandırır."
+            },
+            {
+                q: "Gangliyon nedir?",
+                options: ["Sinir hücresi uzantısıdır.", "Hücre gövdelerinin kümelenmesidir.", "Bir tür duyu organıdır.", "Kas hücresi grubudur.", "Hücreler arası sıvıdır."],
+                correct: 1,
+                rat: "Gangliyonlar, sinir hücrelerinin gövdelerinin bir araya gelmesiyle oluşan düğümlerdir."
+            },
+            {
+                q: "Eklem bacaklıların sinir sistemini diğer omurgasızlardan ayıran temel gelişim nedir?",
+                options: ["Sinir hücresinin olması", "Merkezi bir kordonun olması", "Gelişmiş duyu organları ve büyük gangliyonlar", "Sadece sırtta sinir olması", "Dokulaşmanın olmaması"],
+                correct: 2,
+                rat: "Eklem bacaklılarda sinir sistemi oldukça uzmanlaşmıştır."
+            },
+            {
+                q: "Deniz anasında hangi sinir sistemi tipi bulunur?",
+                options: ["Merdiven tipi", "Ağsı (difüz)", "Merkezi sistem", "İp merdiven", "Nöral tüp tipi"],
+                correct: 1,
+                rat: "Sölenterlerde özelleşmemiş yaygın bir ağ yapısı görülür."
+            },
+            {
+                q: "Omurgalılarda merkezi sinir sistemi hangi embriyonik tabakadan gelişir?",
+                options: ["Endoderm", "Mezoderm", "Ektoderm", "Gastroderm", "Epiderm"],
+                correct: 2,
+                rat: "Sinir sistemi ektoderm tabakasından farklılaşan nöral tüpten gelişir."
+            },
+            {
+                q: "Evrimsel süreçte sinir sistemindeki gelişim yönü nasıldır?",
+                options: ["Karmaşıktan basite", "Merkeziden yaygına", "Yaygın yapıdan merkezi yapıya", "Sırt bölgesinden karın bölgesine", "Hücreden dokuya doğru azalarak"],
+                correct: 2,
+                rat: "Evrimsel süreçte sistemler basitten karmaşığa ve yaygınlıktan merkeziliğe doğru gelişmiştir."
+            }
+        ];
+
+        // --- APP LOGIC ---
+        let currentQ = 0;
+        let score = 0;
+        let timeLeft = 300;
+        let timerInterval;
+        let userChoices = [];
+
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            
+            document.querySelectorAll('.nav-btn').forEach(b => {
+                b.classList.remove('bg-white', 'text-indigo-700', 'shadow');
+                b.classList.add('hover:bg-indigo-600');
+            });
+            const activeBtn = Array.from(document.querySelectorAll('.nav-btn')).find(b => b.innerText.toLowerCase().includes(tabId === 'quiz' ? 'dene' : (tabId === 'home' ? 'giriş' : tabId)));
+            if(activeBtn) {
+                activeBtn.classList.add('bg-white', 'text-indigo-700', 'shadow');
+                activeBtn.classList.remove('hover:bg-indigo-600');
+            }
+        }
+
+        // Initialize Content
+        function init() {
+            const discList = document.getElementById('discover-list');
+            discoverContent.forEach(item => {
+                discList.innerHTML += `
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex gap-4 items-center review-card">
+                        <div class="text-3xl p-3 bg-slate-50 rounded-xl">${item.icon}</div>
+                        <div>
+                            <h4 class="font-bold text-indigo-700">${item.title}</h4>
+                            <p class="text-sm text-slate-600">${item.desc}</p>
+                        </div>
+                    </div>
+                `;
+            });
+
+            const summGrid = document.getElementById('summary-grid');
+            summaryNotes.forEach((note, i) => {
+                summGrid.innerHTML += `
+                    <div class="bg-white p-3 rounded-xl border-l-4 border-emerald-500 shadow-sm flex items-center gap-3 review-card">
+                        <span class="text-xs font-bold text-emerald-600 opacity-50">#${i+1}</span>
+                        <p class="text-sm text-slate-700 font-medium">${note}</p>
+                    </div>
+                `;
+            });
+        }
+
+        function playSound(type) {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                if(type === 'correct') {
+                    osc.frequency.setValueAtTime(800, ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(1200, ctx.currentTime + 0.1);
+                } else {
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(200, ctx.currentTime);
+                }
+                gain.gain.setValueAtTime(0.1, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.2);
+                osc.start();
+                osc.stop(ctx.currentTime + 0.2);
+            } catch(e) {}
+        }
+
+        function startQuiz() {
+            document.getElementById('quiz-intro').classList.add('hidden');
+            document.getElementById('quiz-container').classList.remove('hidden');
+            document.getElementById('quiz-result').classList.add('hidden');
+            currentQ = 0;
+            score = 0;
+            timeLeft = 300;
+            userChoices = [];
+            updateQuestion();
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                const mins = Math.floor(timeLeft / 60);
+                const secs = timeLeft % 60;
+                document.getElementById('timer').innerHTML = `<i class="fas fa-hourglass-half"></i> ${mins}:${secs < 10 ? '0'+secs : secs}`;
+                if (timeLeft <= 0) endQuiz();
+            }, 1000);
+        }
+
+        function updateQuestion() {
+            const q = questions[currentQ];
+            document.getElementById('q-count').innerText = `${currentQ + 1}/10`;
+            document.getElementById('q-score').innerText = score;
+            document.getElementById('question-text').innerText = q.q;
+            const optCont = document.getElementById('options-container');
+            optCont.innerHTML = '';
+            document.getElementById('feedback').classList.add('hidden');
+            
+            q.options.forEach((opt, i) => {
+                const btn = document.createElement('button');
+                btn.className = "p-4 rounded-xl border-2 border-slate-100 text-left transition-all hover:border-indigo-400 hover:bg-indigo-50 font-medium flex items-center";
+                btn.innerHTML = `<span class="bg-slate-100 px-2 py-1 rounded mr-3 text-xs font-bold w-6 text-center">${String.fromCharCode(65+i)}</span> <span>${opt}</span>`;
+                btn.onclick = () => checkAnswer(i, btn);
+                optCont.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(idx, btn) {
+            const q = questions[currentQ];
+            const buttons = document.getElementById('options-container').children;
+            for(let b of buttons) b.disabled = true;
+
+            userChoices.push(idx);
+
+            if (idx === q.correct) {
+                btn.classList.add('correct-btn');
+                score += 10;
+                playSound('correct');
+            } else {
+                btn.classList.add('wrong-btn');
+                buttons[q.correct].classList.add('correct-btn');
+                playSound('wrong');
+            }
+
+            const feedback = document.getElementById('feedback');
+            feedback.innerText = `Bilgi: ${q.rat}`;
+            feedback.classList.remove('hidden', 'bg-emerald-50', 'bg-rose-50', 'text-emerald-700', 'text-rose-700');
+            feedback.classList.add(idx === q.correct ? 'bg-emerald-50' : 'bg-rose-50');
+            feedback.classList.add(idx === q.correct ? 'text-emerald-700' : 'text-rose-700');
+
+            setTimeout(() => {
+                currentQ++;
+                if (currentQ < questions.length) updateQuestion();
+                else endQuiz();
+            }, 2000);
+        }
+
+        function endQuiz() {
+            clearInterval(timerInterval);
+            document.getElementById('quiz-container').classList.add('hidden');
+            document.getElementById('quiz-result').classList.remove('hidden');
+            document.getElementById('final-score-text').innerText = `Toplam Puan: ${score}`;
+            const msg = score >= 80 ? "Harika! Biyoloji senin işin! 🌟" : score >= 50 ? "Güzel deneme, biraz daha tekrarla başarabilirsin! 👍" : "Hemen Özet bölümüne göz atmalısın! 💪";
+            document.getElementById('performance-msg').innerText = msg;
+            
+            generateAnalysis();
+        }
+
+        function generateAnalysis() {
+            const analysisList = document.getElementById('analysis-list');
+            analysisList.innerHTML = '';
+            
+            questions.forEach((q, i) => {
+                const isCorrect = userChoices[i] === q.correct;
+                const card = document.createElement('div');
+                card.className = `bg-white p-6 rounded-2xl border-l-8 ${isCorrect ? 'border-emerald-500' : 'border-rose-500'} shadow-sm review-card`;
+                
+                card.innerHTML = `
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-bold uppercase tracking-wider ${isCorrect ? 'text-emerald-600' : 'text-rose-600'}">Soru ${i+1} - ${isCorrect ? 'Doğru' : 'Yanlış'}</span>
+                        <i class="fas ${isCorrect ? 'fa-check-circle text-emerald-500' : 'fa-times-circle text-rose-500'}"></i>
+                    </div>
+                    <h4 class="font-bold text-slate-800 mb-3">${q.q}</h4>
+                    <div class="space-y-1 mb-3 text-sm">
+                        <p><span class="text-slate-400">Senin Cevabın:</span> <span class="${isCorrect ? 'text-emerald-600 font-bold' : 'text-rose-600 font-bold'}">${q.options[userChoices[i]] || 'Boş'}</span></p>
+                        ${!isCorrect ? `<p><span class="text-slate-400">Doğru Cevap:</span> <span class="text-emerald-600 font-bold">${q.options[q.correct]}</span></p>` : ''}
+                    </div>
+                    <div class="bg-slate-50 p-3 rounded-lg text-xs text-slate-600 italic">
+                        <strong>Çözüm:</strong> ${q.rat}
+                    </div>
+                `;
+                analysisList.appendChild(card);
+            });
+        }
+
+        function scrollToAnalysis() {
+            document.getElementById('analysis-container').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        window.onload = init;
+    </script>
+</body>
+</html>
